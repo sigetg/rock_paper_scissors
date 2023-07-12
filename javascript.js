@@ -1,7 +1,7 @@
 //Author: George Sigety, 7/12/2023
 
 function getComputerChoice() {
-    const choices = ["rock", "paper", "scissors"];
+    const choices = ["rock", "paper","scissors"];
     return choices[Math.floor(3*Math.random())];
 }
 
@@ -33,7 +33,6 @@ function playRound(computerSelection, playerSelection) {
     return gameResult;
 }
 
-//shows different message in console depending on gameResult
 function showGameResult(gameResult, playerSelection, computerSelection) {
     console.log(
         gameResult === 'win' || gameResult === 'loose' ? 
