@@ -9,31 +9,48 @@ function playRound(computerSelection, playerSelection) {
     switch(computerSelection) {
         case 'rock':
             gameResult = 
-            playerSelection === 'rock' ? "It's a tie!" :
-            playerSelection === 'scissors' ? "You loose! Rock beats scissors." : 
-            playerSelection === 'paper' ? "You win! Paper beats rock." : "Please enter either rock, paper, or scissors.";
+            playerSelection === 'rock' ? "tie" :
+            playerSelection === 'scissors' ? "loose" : 
+            playerSelection === 'paper' ? "win" : "again";
             break;
         case 'paper':
             gameResult = 
-            playerSelection === 'rock' ? "You loose! Paper beats rock." :
-            playerSelection === 'scissors' ? "You win! Scissors beats paper" : 
-            playerSelection === 'paper' ? "It's a tie!" : "Please enter either rock, paper, or scissors.";
+            playerSelection === 'rock' ? "loose" :
+            playerSelection === 'scissors' ? "win" : 
+            playerSelection === 'paper' ? "tie" : "again";
             break;
         case 'scissors':
             gameResult = 
-            playerSelection === 'rock' ? "It's a tie!" :
-            playerSelection === 'scissors' ? "It's a tie!" : 
-            playerSelection === 'paper' ? "You win! Paper beats rock" : "Please enter either rock, paper, or scissors.";
+            playerSelection === 'rock' ? "win" :
+            playerSelection === 'scissors' ? "tie" : 
+            playerSelection === 'paper' ? "loose" : "again";
             break;
         default:
-            gameResult = "Please enter either rock, paper, or scissors.";
+            gameResult = "again";
     }
     return gameResult;
 }
 
-const playerSelection = prompt("Please enter rock, paper, or scissors.");
-console.log(`player: ${playerSelection}`)
-const computerSelection = getComputerChoice()
-console.log(`computer: ${computerSelection}`)
-const gameResult = playRound(computerSelection, playerSelection.toLowerCase())
-console.log(gameResult)
+function game() {
+    let gamesWon = 0;
+    for (let i=0; i < 5; i++) {
+        const playerSelection = prompt("Please enter rock, paper, or scissors.").toLowerCase();
+        console.log(`player: ${playerSelection}`);
+        const computerSelection = getComputerChoice();
+        console.log(`computer: ${computerSelection}`);
+        const gameResult = playRound(computerSelection, playerSelection);
+        console.log(
+        gameResult === 'win' || gameResult === 'loose' ? 
+        `You ${gameResult}! ${playerSelection} ${gameResult === "win" ? "beats" : "looses to"} ${computerSelection}.` : 
+        gameResult === 'tie' ? "It's a tie!" : "Please enter either rock, paper, or scissors."
+        );
+        const playAgain = confirm("Play Again?")
+        if (playAgain === true) {
+            continue;
+        } else {
+            break;
+        }
+    }
+}
+
+game()
