@@ -1,9 +1,11 @@
+//Author: George Sigety, 7/12/2023
+
 function getComputerChoice() {
     const choices = ["rock", "paper", "scissors"];
     return choices[Math.floor(3*Math.random())];
 }
 
-
+//returns game result of win, loose, tie, or again, which means the user entered an incorrect value
 function playRound(computerSelection, playerSelection) {
     let gameResult;
     switch(computerSelection) {
@@ -31,21 +33,27 @@ function playRound(computerSelection, playerSelection) {
     return gameResult;
 }
 
+//shows different message in console depending on gameResult
+function showGameResult(gameResult) {
+    console.log(
+        gameResult === 'win' || gameResult === 'loose' ? 
+        `You ${gameResult}! ${playerSelection} ${gameResult === "win" ? "beats" : "looses to"} ${computerSelection}.` : 
+        gameResult === 'tie' ? "It's a tie!" : "Please enter either rock, paper, or scissors."
+    );
+}
+
+//main function. runs playRound five times unless user decides not to play again. 
 function game() {
     let gamesWon = 0;
     for (let i=0; i < 5; i++) {
         const playerSelection = prompt("Please enter rock, paper, or scissors.").toLowerCase();
-        console.log(`player: ${playerSelection}`);
         const computerSelection = getComputerChoice();
-        console.log(`computer: ${computerSelection}`);
         const gameResult = playRound(computerSelection, playerSelection);
-        console.log(
-        gameResult === 'win' || gameResult === 'loose' ? 
-        `You ${gameResult}! ${playerSelection} ${gameResult === "win" ? "beats" : "looses to"} ${computerSelection}.` : 
-        gameResult === 'tie' ? "It's a tie!" : "Please enter either rock, paper, or scissors."
-        );
-        const playAgain = confirm("Play Again?")
-        if (playAgain === true) {
+        console.log(`player: ${playerSelection}`);
+        console.log(`computer: ${computerSelection}`);
+        showGameResult(gameResult)
+        const anotherGame = confirm("Play Again?");
+        if (anotherGame === true) {
             continue;
         } else {
             break;
@@ -53,4 +61,4 @@ function game() {
     }
 }
 
-game()
+game();
