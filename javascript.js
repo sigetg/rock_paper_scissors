@@ -34,7 +34,7 @@ function playRound(computerSelection, playerSelection) {
 }
 
 //shows different message in console depending on gameResult
-function showGameResult(gameResult) {
+function showGameResult(gameResult, playerSelection, computerSelection) {
     console.log(
         gameResult === 'win' || gameResult === 'loose' ? 
         `You ${gameResult}! ${playerSelection} ${gameResult === "win" ? "beats" : "looses to"} ${computerSelection}.` : 
@@ -51,7 +51,7 @@ function game() {
         const gameResult = playRound(computerSelection, playerSelection);
         console.log(`player: ${playerSelection}`);
         console.log(`computer: ${computerSelection}`);
-        showGameResult(gameResult)
+        showGameResult(gameResult, playerSelection, computerSelection)
         const anotherGame = confirm("Play Again?");
         if (anotherGame === true) {
             continue;
