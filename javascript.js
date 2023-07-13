@@ -47,14 +47,55 @@ function playRound(buttonClass) {
     const computerSelection = getComputerChoice();
     const gameResult = getGameResult(computerSelection, playerSelection);
     showGameResult(gameResult, buttonClass, computerSelection)
+    return gameResult;
+}
+
+function playGame(playerChoice, playerWinsTotal, computerWinsTotal) {
+    const computerWins = document.querySelector('.computer.wins');
+    const playerWins = document.querySelector('.player.wins');
+    const gameResult = playRound(playerChoice);
+    if (gameResult === 'win') {
+        playerWinsTotal += 1;
+        playerWins.textContent = playerWinsTotal.toString();
+        if (playerWinsTotal === 5) {
+            const confirmOutcome = confirm("You beat the computer! Play again?");
+            if (confirmOutcome === true) {
+                playerWinsTotal = 0;
+                computerWinsTotal = 0;
+                playerWins.textContent = playerWinsTotal.toString();
+                computerWins.textContent = computerWinsTotal.toString();
+            }
+        }
+    } else if (gameResult === 'loose') {
+        computerWinsTotal += 1;
+        computerWins.textContent = computerWinsTotal.toString();
+        if (computerWinsTotal === 5) {
+            const confirmOutcome = confirm("You got destroyed! Play again?");
+            if (confirmOutcome === true) {
+                playerWinsTotal = 0;
+                computerWinsTotal = 0;
+                playerWins.textContent = playerWinsTotal.toString();
+                computerWins.textContent = computerWinsTotal.toString();
+            }                    
+        }
+    }
+    return [computerWinsTotal, playerWinsTotal];
 }
 
 //main function. Listens for button presses.
 function main() {
-    const buttons = document.querySelectorAll("button");
+    let computerWinsTotal = 0;
+    let playerWinsTotal = 0;
+    const computerWins = document.querySelector('.computer.wins');
+    const playerWins = document.querySelector('.player.wins');
+    playerWins.textContent = playerWinsTotal.toString();
+    computerWins.textContent = computerWinsTotal.toString();
+    const buttons = document.querySelectorAll('button');
     buttons.forEach((button) => {
         button.addEventListener('click', () => {
-            playRound(button.className);
+            let winTotals = playGame(button.className, playerWinsTotal, computerWinsTotal)
+            computerWinsTotal = winTotals[0];
+            playerWinsTotal = winTotals[1];
         });
     })
 }

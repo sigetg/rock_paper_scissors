@@ -31,6 +31,7 @@ h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border: 10px solid black;
 }
 
 #buttons {
@@ -46,24 +47,35 @@ h1 {
     gap: 10px;    
     padding: 10px;
     border-radius: 10px;
+    border: 10px solid black;
+    
 }
 
 #wins {
     color: midnightblue;
     display: flex;
     gap: 20px;
+    justify-content: center;
 }
 
-#wins .computer {
-    padding: 5px;
-    border-radius: 10px;
+.first, .second {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
     background-color: dimgrey;
+    border: solid black;
+    border-radius: 10px;
 }
 
-#wins .player {
+#wins .computer, #wins .player {
     padding: 5px;
+    margin: 20px;
     border-radius: 10px;
-    background-color: dimgray;
+    font-size: 75px;
+
+    text-align: center;
+    width: fit-content;
 }
 
 .inner {
